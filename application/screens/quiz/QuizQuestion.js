@@ -1,11 +1,15 @@
 import React from 'react';
-import { Text, View, StyleSheet } from 'react-native';
+import { Text, View, StyleSheet, Button } from 'react-native';
 
 export default class QuizQuestion extends React.Component {
     render() {
         return (
             <View style={styles.container}>
                 <Text>QuizQuestion Screen</Text>
+                <Button
+                    title="Show result"
+                    onPress={() => this.props.navigation.navigate('QuizResult')}
+                />
             </View>
         );
     }
