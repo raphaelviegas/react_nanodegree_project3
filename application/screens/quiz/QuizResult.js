@@ -1,25 +1,32 @@
 import React from 'react';
-import { Text, View, StyleSheet, Button } from 'react-native';
+import styled from 'styled-components/native'
+import BasicView from '../../components/BasicView'
+import { View } from 'react-native';
+import CustomButton from '../../components/CustomButton'
+import { outlinedButtonBackground, outlinedButtonBorderColor, outlinedButtonFontColor } from '../../config/colors'
 
-export default class QuizResult extends React.Component {
+const QuizResultHeader = styled.Text`
+    
+`
+
+class StartQuiz extends React.Component {
     render() {
         return (
-            <View style={styles.container}>
-                <Text>QuizResult Screen</Text>
-                <Button
-                    title="Go back to home"
-                    onPress={() => this.props.navigation.navigate('Home')}
-                />
-            </View>
+            <BasicView>
+                <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+                    <CustomButton
+                        onPress={() => this.props.navigation.navigate('Quiz')}
+                    >Start Again</CustomButton>
+                    <CustomButton
+                        backgroundColor={outlinedButtonBackground}
+                        fontColor={outlinedButtonFontColor}
+                        borderColor={outlinedButtonBorderColor}
+                        onPress={() => this.props.navigation.navigate('Home')}
+                    >Go back to Home</CustomButton>
+                </View>
+            </BasicView>
         );
     }
 }
 
-const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        backgroundColor: '#fff',
-        alignItems: 'center',
-        justifyContent: 'center',
-    },
-});
+export default StartQuiz

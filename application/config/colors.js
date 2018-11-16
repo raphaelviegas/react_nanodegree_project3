@@ -36,3 +36,8 @@ export const deckInfoItemHighlightColor = green
 // CUSTOMBUTTON COLORS
 export const defaultBackgroundColor = primary
 export const defaultFontColor = white
+
+// QUIZRESULTS COLORS
+export const outlinedButtonBackground = white
+export const outlinedButtonFontColor = primary
+export const outlinedButtonBorderColor = primary

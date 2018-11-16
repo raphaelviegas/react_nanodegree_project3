@@ -1,10 +1,10 @@
 import React from 'react'
-import { Text, TouchableOpacity } from 'react-native'
 import styled from 'styled-components/native'
 import { defaultBackgroundColor, defaultFontColor } from '../config/colors'
 
 const CustomButtonTouchableOpacity = styled.TouchableOpacity`
     background-color: ${props => props.backgroundColor};
+    border: 3px solid ${props => props.borderColor};
     padding-top: 15;
     padding-bottom: 15;
     padding-left: 10;
@@ -14,6 +14,8 @@ const CustomButtonTouchableOpacity = styled.TouchableOpacity`
     width: 80%;
     margin-left:auto;
     margin-right: auto;
+    margin-top: 10;
+    margin-bottom: 10;
 `
 
 const CustonButtonText = styled.Text`
@@ -23,11 +25,12 @@ const CustonButtonText = styled.Text`
     font-weight: 700;
 `
 
-function CustomButtom({ children, onPress, backgroundColor = defaultBackgroundColor, fontColor = defaultFontColor }) {
+function CustomButtom({ children, onPress, backgroundColor = defaultBackgroundColor, fontColor = defaultFontColor, borderColor = '#ffffff00' }) {
     return (
         <CustomButtonTouchableOpacity
             onPress={onPress}
             backgroundColor={backgroundColor}
+            borderColor={borderColor}
         >
             <CustonButtonText fontColor={fontColor}>{children}</CustonButtonText>
         </CustomButtonTouchableOpacity>
