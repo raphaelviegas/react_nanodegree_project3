@@ -1,21 +1,14 @@
 import React from 'react';
-import { Text, View, StyleSheet } from 'react-native';
+import BasicView from '../../components/BasicView'
+import PageTitle from '../../components/PageTitle'
+import { headerFontColor } from '../../config/colors'
 
 export default class AddDeck extends React.Component {
     render() {
         return (
-            <View style={styles.container}>
-                <Text>AddDeck Screen</Text>
-            </View>
+            <BasicView>
+                <PageTitle headerFontColor={headerFontColor}>AddDeck Screen</PageTitle>
+            </BasicView>
         );
     }
 }
-
-const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        backgroundColor: '#fff',
-        alignItems: 'center',
-        justifyContent: 'center',
-    },
-});

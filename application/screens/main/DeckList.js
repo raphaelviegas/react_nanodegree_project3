@@ -1,16 +1,23 @@
 import React from 'react';
-import { Text, View, StyleSheet, Button } from 'react-native';
+import { View, StyleSheet, FlatList } from 'react-native';
+import BasicView from '../../components/BasicView'
+import PageTitle from '../../components/PageTitle'
+import { headerFontColor } from '../../config/colors'
+import Card from '../../components/Card'
 
 export default class DeckList extends React.Component {
+    goToDeckPage = (deckId) => {
+        this.props.navigation.navigate('Deck')
+    }
     render() {
         return (
-            <View style={styles.container}>
-                <Text>DeckList Screen</Text>
-                <Button
-                    title="Go to Deck Page"
-                    onPress={() => this.props.navigation.navigate('Deck')}
+            <BasicView>
+                <PageTitle headerFontColor={headerFontColor}>DeckList Screen</PageTitle>
+                <FlatList
+                    data={[{ key: 'a' }, { key: 'b' }, { key: 'c' }, { key: 'd' }, { key: 'e' }, { key: 'f' }]}
+                    renderItem={({ item }) => <Card onPressCard={this.goToDeckPage} />}
                 />
-            </View>
+            </BasicView>
         );
     }
 }
@@ -18,8 +25,7 @@ export default class DeckList extends React.Component {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: '#fff',
-        alignItems: 'center',
         justifyContent: 'center',
+        alignItems: 'center'
     },
 });
