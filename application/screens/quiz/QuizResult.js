@@ -5,10 +5,6 @@ import { View } from 'react-native';
 import CustomButton from '../../components/CustomButton'
 import { outlinedButtonBackground, outlinedButtonBorderColor, outlinedButtonFontColor } from '../../config/colors'
 
-const QuizResultHeader = styled.Text`
-    
-`
-
 class StartQuiz extends React.Component {
     render() {
         return (

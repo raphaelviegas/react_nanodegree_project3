@@ -41,3 +41,7 @@ export const defaultFontColor = white
 export const outlinedButtonBackground = white
 export const outlinedButtonFontColor = primary
 export const outlinedButtonBorderColor = primary
+
+// CUSTOMINPUT COLORS
+export const defaultBorderColor = primary
+export const defaultInputTextColor = primary
