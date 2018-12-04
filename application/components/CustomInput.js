@@ -25,7 +25,7 @@ const CustomTextInput = styled.TextInput`
     padding-right: 6;
 `
 
-function CustomInput({ value, label, fontColor = defaultInputTextColor, borderColor = defaultBorderColor }) {
+function CustomInput({ value, label, fontColor = defaultInputTextColor, borderColor = defaultBorderColor, onChange }) {
     return (
         <InputView>
             {label && <InputLabel fontColor={fontColor}>{label}</InputLabel>}
