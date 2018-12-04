@@ -4,13 +4,12 @@ import { defaultBackgroundColor, defaultFontColor } from '../config/colors'
 
 const CustomButtonTouchableOpacity = styled.TouchableOpacity`
     background-color: ${props => props.backgroundColor};
-    border: 3px solid ${props => props.borderColor};
-    padding-top: 15;
-    padding-bottom: 15;
-    padding-left: 10;
-    padding-right: 10;
+    border: ${props => props.small ? '2px' : '3px'} solid ${props => props.borderColor};
+    padding-top: ${props => props.small ? 5 : 15};
+    padding-bottom: ${props => props.small ? 5 : 15};
+    padding-left: ${props => props.small ? 5 : 10};
+    padding-right: ${props => props.small ? 5 : 10};
     border-radius: 8;
-    font-size: 22;
     width: 80%;
     margin-left:auto;
     margin-right: auto;
@@ -20,19 +19,20 @@ const CustomButtonTouchableOpacity = styled.TouchableOpacity`
 
 const CustonButtonText = styled.Text`
     color: ${props => props.fontColor};
-    font-size: 18;
+    font-size: ${props => props.small ? 16 : 22};
     text-align: center;
-    font-weight: 700;
+    font-weight: ${props => props.small ? 500 : 700};
 `
 
-function CustomButtom({ children, onPress, backgroundColor = defaultBackgroundColor, fontColor = defaultFontColor, borderColor = '#ffffff00' }) {
+function CustomButtom({ children, onPress, small = false, backgroundColor = defaultBackgroundColor, fontColor = defaultFontColor, borderColor = '#ffffff00' }) {
     return (
         <CustomButtonTouchableOpacity
             onPress={onPress}
             backgroundColor={backgroundColor}
             borderColor={borderColor}
+            small={small}
         >
-            <CustonButtonText fontColor={fontColor}>{children}</CustonButtonText>
+            <CustonButtonText fontColor={fontColor} small={small}>{children}</CustonButtonText>
         </CustomButtonTouchableOpacity>
     )
 }

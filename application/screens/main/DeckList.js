@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, StyleSheet, FlatList } from 'react-native';
+import { StyleSheet, FlatList } from 'react-native';
 import BasicView from '../../components/BasicView'
 import PageTitle from '../../components/PageTitle'
 import { headerFontColor } from '../../config/colors'

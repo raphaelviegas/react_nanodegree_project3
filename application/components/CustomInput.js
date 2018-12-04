@@ -3,7 +3,11 @@ import styled from 'styled-components/native'
 import { defaultBorderColor, defaultInputTextColor, primary } from '../config/colors'
 
 const InputView = styled.View`
-    width: 100%;
+    width: 95%;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 10;
+    margin-bottom:10;
 `
 
 const InputLabel = styled.Text`
@@ -29,7 +33,12 @@ function CustomInput({ value, label, fontColor = defaultInputTextColor, borderCo
     return (
         <InputView>
             {label && <InputLabel fontColor={fontColor}>{label}</InputLabel>}
-            <CustomTextInput fontColor={fontColor} borderColor={borderColor} value={value} />
+            <CustomTextInput
+                fontColor={fontColor}
+                borderColor={borderColor}
+                value={value}
+                onChangeText={onChange}
+            />
         </InputView>
     )
 }
