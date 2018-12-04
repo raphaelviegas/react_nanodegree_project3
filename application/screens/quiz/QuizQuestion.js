@@ -1,4 +1,5 @@
 import React from 'react';
+import QuizCard from '../../components/QuizCard'
 import { Text, View, StyleSheet, Button } from 'react-native';
 
 export default class QuizQuestion extends React.Component {
@@ -6,6 +7,7 @@ export default class QuizQuestion extends React.Component {
         return (
             <View style={styles.container}>
                 <Text>QuizQuestion Screen</Text>
+                <QuizCard question='Aqui vai a pergunta' answer='Aqui vai a resposta!' />
                 <Button
                     title="Show result"
                     onPress={() => this.props.navigation.navigate('QuizResult')}
@@ -18,7 +20,7 @@ export default class QuizQuestion extends React.Component {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: '#fff',
+        backgroundColor: '#FFFAFF',
         alignItems: 'center',
         justifyContent: 'center',
     },

@@ -23,7 +23,7 @@ export default class AddDeck extends React.Component {
     render() {
         const { deckName, deckDescription } = this.state
         return (
-            <BasicView>
+            <BasicView justifyContent="flex-start">
                 <PageTitle headerFontColor={headerFontColor}>AddDeck Screen</PageTitle>
                 <CustomInput label="Deck Name" value={deckName} onChange={(text) => this.updateInput('deckName', text)} />
                 <CustomInput label="Deck Description" value={deckDescription} onChange={(text) => this.updateInput('deckDescription', text)} />

@@ -7,7 +7,7 @@ export default class StartQuiz extends React.Component {
     render() {
         return (
             <BasicView>
-                <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+                <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center', marginTop: 10 }}>
                     <CustomButton
                         onPress={() => this.props.navigation.navigate('Quiz')}
                     >Start Quiz</CustomButton>

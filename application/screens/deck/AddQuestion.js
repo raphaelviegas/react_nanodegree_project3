@@ -29,8 +29,6 @@ export default class AddQuestion extends React.Component {
                     small={true}
                     onPress={() => console.log('Add Question buttom is pressed')}
                 >Add Deck</CustomButton>
-
-                <Text>{JSON.stringify(this.state)}</Text>
             </BasicView>
         );
     }

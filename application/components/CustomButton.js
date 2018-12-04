@@ -4,7 +4,7 @@ import { defaultBackgroundColor, defaultFontColor } from '../config/colors'
 
 const CustomButtonTouchableOpacity = styled.TouchableOpacity`
     background-color: ${props => props.backgroundColor};
-    border: ${props => props.small ? '2px' : '3px'} solid ${props => props.borderColor};
+    border: ${props => props.small ? '1px' : '2px'} solid ${props => props.borderColor};
     padding-top: ${props => props.small ? 5 : 15};
     padding-bottom: ${props => props.small ? 5 : 15};
     padding-left: ${props => props.small ? 5 : 10};
@@ -19,7 +19,7 @@ const CustomButtonTouchableOpacity = styled.TouchableOpacity`
 
 const CustonButtonText = styled.Text`
     color: ${props => props.fontColor};
-    font-size: ${props => props.small ? 16 : 22};
+    font-size: ${props => props.small ? 16 : 20};
     text-align: center;
     font-weight: ${props => props.small ? 500 : 700};
 `
