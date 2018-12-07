@@ -4,8 +4,7 @@ import PageTitle from '../../components/PageTitle'
 import CustomInput from '../../components/CustomInput'
 import CustomButton from '../../components/CustomButton'
 import { headerFontColor, defaultBackgroundColor, defaultFontColor } from '../../config/colors'
-
-
+import { addNewDeck } from '../../api'
 
 export default class AddDeck extends React.Component {
 
@@ -20,18 +19,27 @@ export default class AddDeck extends React.Component {
         }))
     }
 
+    addDeck = () => {
+        const { deckName, deckDescription } = this.state
+        const deckInfo = {
+            title: deckName,
+            description: deckDescription
+        }
+        addNewDeck({ key: deckName, deckInfo })
+    }
+
     render() {
         const { deckName, deckDescription } = this.state
         return (
-            <BasicView justifyContent="flex-start">
-                <PageTitle headerFontColor={headerFontColor}>AddDeck Screen</PageTitle>
+            <BasicView justifyContent="center">
+                <PageTitle headerFontColor={headerFontColor}>Add new deck</PageTitle>
                 <CustomInput label="Deck Name" value={deckName} onChange={(text) => this.updateInput('deckName', text)} />
                 <CustomInput label="Deck Description" value={deckDescription} onChange={(text) => this.updateInput('deckDescription', text)} />
                 <CustomButton
                     backgroundColor={defaultBackgroundColor}
                     fontColor={defaultFontColor}
                     small={true}
-                    onPress={() => console.log('Add Deck buttom is pressed')}
+                    onPress={this.addDeck}
                 >Add Deck</CustomButton>
             </BasicView>
         );
