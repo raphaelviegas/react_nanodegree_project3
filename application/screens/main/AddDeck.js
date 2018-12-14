@@ -4,9 +4,10 @@ import PageTitle from '../../components/PageTitle'
 import CustomInput from '../../components/CustomInput'
 import CustomButton from '../../components/CustomButton'
 import { headerFontColor, defaultBackgroundColor, defaultFontColor } from '../../config/colors'
+import { observer, inject } from "mobx-react";
 import { addNewDeck } from '../../api'
 
-export default class AddDeck extends React.Component {
+class AddDeck extends React.Component {
 
     state = {
         deckName: '',
@@ -26,7 +27,7 @@ export default class AddDeck extends React.Component {
             description: deckDescription
         }
         //Call action
-        //addNewDeck({ key: deckName, deckInfo })
+        this.props.store.fetchAddDeck({ key: deckName, deckInfo })
 
         //Clear state
         this.setState(() => ({
@@ -54,3 +55,5 @@ export default class AddDeck extends React.Component {
         );
     }
 }
+
+export default inject('store')(observer(AddDeck))

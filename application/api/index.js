@@ -45,7 +45,7 @@ export function saveQuizBestResult({ key, quizResult }) {
         })
 }
 
-// export function clearAll() {
-//     return AsyncStorage.getAllKeys()
-//         .then(keys => AsyncStorage.multiRemove(keys))
-// }
+export function clearAll() {
+    return AsyncStorage.getAllKeys()
+        .then(keys => AsyncStorage.multiRemove(keys))
+}

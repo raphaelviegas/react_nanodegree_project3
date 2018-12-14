@@ -1,29 +1,36 @@
 import React from 'react';
-import { FlatList } from 'react-native';
+import { FlatList, Text } from 'react-native';
 import BasicView from '../../components/BasicView'
 import PageTitle from '../../components/PageTitle'
 import { headerFontColor } from '../../config/colors'
 import Card from '../../components/Card'
-//import { getDecks, getDeck } from '../../api'
+import { observer, inject } from "mobx-react";
 
-export default class DeckList extends React.Component {
+class DeckList extends React.Component {
     goToDeckPage = (deckId) => {
         this.props.navigation.navigate('Deck')
     }
     componentDidMount() {
-        //getDeck('Teste').then(res => console.log('Resposta do getDeck: ', JSON.parse(res)))
-        //getDecks().then(res => { res.map(item => console.log(item)) })
+        this.props.store.fetchDecks()
+
+        // console.log('Store Inicial: ', this.props.store.toJSON())
+        // this.props.store.addCard({ title: 'teste', description: 'testeeee' })
+        // console.log('Store Atualizada: ', this.props.store.toJSON())
+        // this.props.store.cards[0].addQuestion({ question: 'Teste de questão', answer: 'Teste de resposta' })
+        // console.log('Store Atualizada com questão: ', this.props.store.toJSON())
     }
     render() {
+
         return (
             <BasicView>
                 <PageTitle headerFontColor={headerFontColor}>DeckList Screen</PageTitle>
                 <FlatList
-                    data={[{ key: 'a' }, { key: 'b' }]}
-                    renderItem={({ item }) => <Card onPressCard={this.goToDeckPage} />}
+                    data={this.props.store.decks}
+                    renderItem={({ item }) => <Card key={item.title} title={item.title} description={item.description} onPressCard={this.goToDeckPage} />}
                 />
             </BasicView>
         );
     }
 }
 
+export default inject('store')(observer(DeckList))

@@ -2,8 +2,11 @@ import React from 'react'
 import { View } from 'react-native'
 import { AppScreens } from '../routes'
 
-export default class Main extends React.Component {
+
+class Main extends React.Component {
+    //Teste do MST
     render() {
+
         return (
             <View style={{ flex: 1 }}>
                 <AppScreens />
@@ -12,3 +15,4 @@ export default class Main extends React.Component {
     }
 }
 
+export default Main

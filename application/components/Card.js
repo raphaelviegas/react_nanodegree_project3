@@ -83,8 +83,8 @@ const DeckCard = (props) => {
             onPress={() => props.onPressCard()}
         >
             <CardHeader backgroundColor={cardHeader}>
-                <CardHeaderText fontColor={cardHeaderFont}>Card Name</CardHeaderText>
-                <CardSubHeader fontColor={cardSubHeaderFont}>Card description</CardSubHeader>
+                <CardHeaderText fontColor={cardHeaderFont}>{props.title}</CardHeaderText>
+                <CardSubHeader fontColor={cardSubHeaderFont}>{props.description}</CardSubHeader>
             </CardHeader>
             <CardContent backgroundColor={cardContentBackground}>
                 <CardContentItem>
