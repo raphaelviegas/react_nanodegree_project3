@@ -25,7 +25,16 @@ export default class AddDeck extends React.Component {
             title: deckName,
             description: deckDescription
         }
-        addNewDeck({ key: deckName, deckInfo })
+        //Call action
+        //addNewDeck({ key: deckName, deckInfo })
+
+        //Clear state
+        this.setState(() => ({
+            deckName: '',
+            deckDescription: ''
+        }))
+
+        //Go to Deck Page
     }
 
     render() {
