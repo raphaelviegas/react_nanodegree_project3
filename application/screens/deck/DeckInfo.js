@@ -4,6 +4,10 @@ import styled from 'styled-components/native'
 import { deckInfoHeader, deckDescriptionColor, deckInfoItemTextColor, deckInfoItemHighlightColor } from '../../config/colors'
 import { View } from 'react-native'
 import PageTitle from '../../components/PageTitle'
+import CustomButton from '../../components/CustomButton'
+import { red, defaultFontColor } from '../../config/colors'
+import { observer, inject } from "mobx-react";
+import { Alert } from 'react-native'
 
 const DeckDescription = styled.Text`
     font-size: 14;
@@ -38,24 +42,50 @@ const DeckInfoItemHighlight = styled.Text`
 `
 
 class DeckInfo extends React.Component {
+    removeDeck = (deckInfo) => {
+        Alert.alert(
+            'Remove Deck',
+            `Are you sure you want to remove ${deckInfo.title}`,
+            [
+                { text: 'Cancel', onPress: () => console.log('Cancel Pressed'), style: 'cancel' },
+                {
+                    text: 'OK', onPress: () => {
+                        const key = deckInfo.title
+                        deckInfo.fetchRemoveFeck(key)
+                        this.props.navigation.navigate('DeckList')
+                    }
+                },
+            ],
+            { cancelable: false }
+        )
+    }
+
     render() {
+        const deckInfo = this.props.navigation.getParam('deckInfo', {})
+        const { title, description, numOfQuestions, bestResult } = deckInfo
         return (
             <BasicView>
                 <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-                    <PageTitle headerFontColor={deckInfoHeader}>Deck Name</PageTitle>
-                    <DeckDescription fontColor={deckDescriptionColor}>Here comes the deck description</DeckDescription>
+                    <PageTitle headerFontColor={deckInfoHeader}>{title}</PageTitle>
+                    <DeckDescription fontColor={deckDescriptionColor}>{description || 'No description'}</DeckDescription>
                     <DeckInfoItem>
                         <DeckInfoItemText fontColor={deckInfoItemTextColor}># of Questions</DeckInfoItemText>
-                        <DeckInfoItemHighlight fontColor={deckInfoItemHighlightColor}>10</DeckInfoItemHighlight>
+                        <DeckInfoItemHighlight fontColor={deckInfoItemHighlightColor}>{numOfQuestions || '0'}</DeckInfoItemHighlight>
                     </DeckInfoItem>
                     <DeckInfoItem>
                         <DeckInfoItemText fontColor={deckInfoItemTextColor}>Quiz best result</DeckInfoItemText>
-                        <DeckInfoItemHighlight fontColor={deckInfoItemHighlightColor}>6/10 (60%)</DeckInfoItemHighlight>
+                        <DeckInfoItemHighlight fontColor={deckInfoItemHighlightColor}>{bestResult || '-'}</DeckInfoItemHighlight>
                     </DeckInfoItem>
+                    <CustomButton
+                        backgroundColor={red}
+                        fontColor={defaultFontColor}
+                        small={true}
+                        onPress={() => this.removeDeck(deckInfo)}
+                    >Remove Deck</CustomButton>
                 </View>
             </BasicView>
         );
     }
 }
 
-export default DeckInfo
+export default inject('store')(observer(DeckInfo))

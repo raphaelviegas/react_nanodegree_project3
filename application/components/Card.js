@@ -83,17 +83,17 @@ const DeckCard = (props) => {
             onPress={() => props.onPressCard()}
         >
             <CardHeader backgroundColor={cardHeader}>
-                <CardHeaderText fontColor={cardHeaderFont}>{props.title}</CardHeaderText>
-                <CardSubHeader fontColor={cardSubHeaderFont}>{props.description}</CardSubHeader>
+                <CardHeaderText fontColor={cardHeaderFont}>{props.cardContent.title}</CardHeaderText>
+                <CardSubHeader fontColor={cardSubHeaderFont}>{props.cardContent.description}</CardSubHeader>
             </CardHeader>
             <CardContent backgroundColor={cardContentBackground}>
                 <CardContentItem>
                     <CardContentItemHeader fontColor={'#FFF'}># of Questions</CardContentItemHeader>
-                    <CardContentText>10</CardContentText>
+                    <CardContentText>{props.cardContent.numOfQuestions}</CardContentText>
                 </CardContentItem>
                 <CardContentItem>
                     <CardContentItemHeader fontColor={'#FFF'}>Quiz best result</CardContentItemHeader>
-                    <CardContentText>80%</CardContentText>
+                    <CardContentText>{props.cardContent.bestResult}</CardContentText>
                 </CardContentItem>
             </CardContent>
         </CardTouchableOpacity>

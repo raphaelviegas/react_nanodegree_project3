@@ -1,9 +1,9 @@
-const black = '#000F08'
-const white = '#FFFAFF'
-const red = '#993955'
-const blue = '#3E92CC'
-const green = '#19535F'
-const grey = '#778C91'
+export const black = '#000F08'
+export const white = '#FFFAFF'
+export const red = '#993955'
+export const blue = '#3E92CC'
+export const green = '#19535F'
+export const grey = '#778C91'
 
 export const primary = green
 export const secondary = blue

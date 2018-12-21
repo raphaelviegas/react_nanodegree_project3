@@ -3,10 +3,9 @@ import BasicView from '../../components/BasicView'
 import CustomInput from '../../components/CustomInput'
 import CustomButton from '../../components/CustomButton'
 import { defaultBackgroundColor, defaultFontColor } from '../../config/colors'
+import { observer, inject } from "mobx-react";
 
-import { Text } from 'react-native'
-
-export default class AddQuestion extends React.Component {
+class AddQuestion extends React.Component {
     state = {
         question: '',
         answer: ''
@@ -17,7 +16,23 @@ export default class AddQuestion extends React.Component {
             [key]: value
         }))
     }
+
+    addQuestion = ({ question, answer, deckInfo }) => {
+        const key = deckInfo.title
+        const questionObject = { question, answer }
+
+        //Call action
+        deckInfo.fetchAddQuestion({ key, questionObject })
+
+        //Clear state
+        this.setState(() => ({
+            question: '',
+            answer: ''
+        }))
+    }
+
     render() {
+        const deckInfo = this.props.navigation.getParam('deckInfo', {})
         const { question, answer } = this.state
         return (
             <BasicView>
@@ -27,10 +42,11 @@ export default class AddQuestion extends React.Component {
                     backgroundColor={defaultBackgroundColor}
                     fontColor={defaultFontColor}
                     small={true}
-                    onPress={() => console.log('Add Question buttom is pressed')}
-                >Add Deck</CustomButton>
+                    onPress={() => this.addQuestion({ question, answer, deckInfo })}
+                >Add Question</CustomButton>
             </BasicView>
         );
     }
 }
 
+export default inject('store')(observer(AddQuestion))

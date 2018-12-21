@@ -6,11 +6,14 @@ import { statusColor } from './application/config/colors'
 import { Provider } from 'mobx-react'
 import Store from './application/store'
 
-//onPatch is used for debugging. Unable that for production
-import { onPatch } from "mobx-state-tree";
-onPatch(Store, patch => {
-  console.log(patch);
+//onAction and onSnapshot are used for debugging. Unable that for production
+import { onAction, onSnapshot } from "mobx-state-tree";
+onAction(Store, action => {
+  console.log('Action called : ', action);
 });
+onSnapshot(Store, newSnapshot => {
+  console.log("New state: ", newSnapshot)
+})
 
 function CustomStatusBar({ backgroundColor, ...props }) {
   return (

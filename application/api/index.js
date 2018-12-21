@@ -18,15 +18,15 @@ export function removeDeck(key) {
     return AsyncStorage.removeItem(key)
 }
 
-export function addQuestionToDeck({ key, question }) {
+export function addQuestionToDeck({ key, questionObject }) {
     return AsyncStorage.getItem(key)
         .then(res => {
             const cardInfo = JSON.parse(res)
             if (cardInfo.questions) {
-                cardInfo.questions.push(question)
+                cardInfo.questions.push(questionObject)
             } else {
                 cardInfo.questions = []
-                cardInfo.questions.push(question)
+                cardInfo.questions.push(questionObject)
             }
             AsyncStorage.setItem(key, JSON.stringify(cardInfo))
         })

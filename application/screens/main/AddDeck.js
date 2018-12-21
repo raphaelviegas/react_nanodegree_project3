@@ -28,7 +28,6 @@ class AddDeck extends React.Component {
         }
         //Call action
         this.props.store.fetchAddDeck({ key: deckName, deckInfo })
-
         //Clear state
         this.setState(() => ({
             deckName: '',
@@ -36,6 +35,7 @@ class AddDeck extends React.Component {
         }))
 
         //Go to Deck Page
+        this.props.navigation.navigate('Deck', { deckInfo })
     }
 
     render() {
