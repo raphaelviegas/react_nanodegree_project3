@@ -43,14 +43,6 @@ const DeckInfoItemHighlight = styled.Text`
 
 class DeckInfo extends React.Component {
 
-    state = {
-        title: '',
-        description: '',
-        numOfQuestions: '',
-        bestResult: '',
-        deckInfo: {}
-    }
-
     removeDeck = (deckInfo) => {
         Alert.alert(
             'Remove Deck',
@@ -69,20 +61,20 @@ class DeckInfo extends React.Component {
         )
     }
 
-    componentDidMount() {
-        const key = this.props.navigation.getParam('key', {})
-        const deckInfo = this.props.store.deckInfo(key)
-        if (deckInfo.length > 0) {
-            const { title, description, numOfQuestions, bestResult } = deckInfo[0]
-            this.setState({
-                title, description, numOfQuestions, bestResult, deckInfo: deckInfo[0]
-            })
-        }
-    }
-
     render() {
-        const { title, description, numOfQuestions, bestResult, deckInfo } = this.state
-        console.log('State: ', this.state)
+        const data = { title: '', description: '', numOfQuestions: '', bestResult: '', deckInfo: {} }
+        const key = this.props.navigation.getParam('key', {})
+        const storedDeckInfo = this.props.store.deckInfo(key)
+        if (storedDeckInfo.length > 0) {
+            data.title = storedDeckInfo[0].title
+            data.description = storedDeckInfo[0].description
+            data.numOfQuestions = storedDeckInfo[0].numOfQuestions
+            data.bestResult = storedDeckInfo[0].bestResult
+            data.deckInfo = storedDeckInfo[0]
+        }
+
+        const { title, description, numOfQuestions, bestResult, deckInfo } = data
+
         return (
             <BasicView>
                 <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>

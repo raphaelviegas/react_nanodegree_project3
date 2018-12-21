@@ -1,21 +1,22 @@
 import React from 'react'
 import QuizCard from '../../components/QuizCard'
 import { Text, View, StyleSheet, Button } from 'react-native'
+import { observer, inject } from "mobx-react";
 import ArrayShuffle from 'array-shuffle'
 
-export default class QuizQuestion extends React.Component {
+class QuizQuestion extends React.Component {
     state = {
         questions: [],
         numOfQuestions: 0,
         rightAnswers: 0,
-        showQuestions: '',
-        showAnswer: '',
+        currentQuestion: 0,
         deckKey: ''
     }
 
     componentDidMount() {
-        const deckInfo = this.props.navigation.getParam('deckInfo', {})
-        const { title, numOfQuestions, questions } = deckInfo
+        const key = this.props.navigation.getParam('key', {})
+        const storedDeckInfo = this.props.store.deckInfo(key)
+        const { title, numOfQuestions, questions } = storedDeckInfo[0]
         const shuffledQuestions = ArrayShuffle(questions)
         this.setState({
             questions: shuffledQuestions,
@@ -47,3 +48,5 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
     },
 });
+
+export default inject('store')(observer(QuizQuestion))

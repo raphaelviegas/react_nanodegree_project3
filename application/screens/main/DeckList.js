@@ -1,6 +1,5 @@
 import React from 'react';
-import { FlatList } from 'react-native';
-import BasicView from '../../components/BasicView'
+import { FlatList, View } from 'react-native';
 import Card from '../../components/Card'
 import { observer, inject } from "mobx-react";
 
@@ -13,7 +12,7 @@ class DeckList extends React.Component {
     }
     render() {
         return (
-            <BasicView>
+            < View style={{ flex: 1, paddingRight: 10, paddingLeft: 10, justifyContent: 'center', marginTop: 10 }}>
                 <FlatList
                     data={this.props.store.decks}
                     keyExtractor={(item, index) => index.toString()}
@@ -21,7 +20,7 @@ class DeckList extends React.Component {
                     //Used extraData to re-render FlatList after adding a deck or adding a question to a deck
                     extraData={{ length: this.props.store.decks.length, numOfQuestions: this.props.store.decks.map(deck => deck.numOfQuestions) }}
                 />
-            </BasicView>
+            </View>
         );
     }
 }

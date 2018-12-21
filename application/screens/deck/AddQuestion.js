@@ -8,7 +8,8 @@ import { observer, inject } from "mobx-react";
 class AddQuestion extends React.Component {
     state = {
         question: '',
-        answer: ''
+        answer: '',
+        deckInfo: {}
     }
 
     updateInput = (key, value) => {
@@ -31,9 +32,18 @@ class AddQuestion extends React.Component {
         }))
     }
 
+    componentDidMount() {
+        const key = this.props.navigation.getParam('key', {})
+        const deckInfo = this.props.store.deckInfo(key)
+        if (deckInfo.length > 0) {
+            this.setState({
+                deckInfo: deckInfo[0]
+            })
+        }
+    }
+
     render() {
-        const deckInfo = this.props.navigation.getParam('deckInfo', {})
-        const { question, answer } = this.state
+        const { question, answer, deckInfo } = this.state
         return (
             <BasicView>
                 <CustomInput label="Question" value={question} onChange={(text) => this.updateInput('question', text)} />
