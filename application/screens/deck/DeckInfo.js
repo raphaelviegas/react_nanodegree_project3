@@ -42,6 +42,15 @@ const DeckInfoItemHighlight = styled.Text`
 `
 
 class DeckInfo extends React.Component {
+
+    state = {
+        title: '',
+        description: '',
+        numOfQuestions: '',
+        bestResult: '',
+        deckInfo: {}
+    }
+
     removeDeck = (deckInfo) => {
         Alert.alert(
             'Remove Deck',
@@ -50,9 +59,9 @@ class DeckInfo extends React.Component {
                 { text: 'Cancel', onPress: () => console.log('Cancel Pressed'), style: 'cancel' },
                 {
                     text: 'OK', onPress: () => {
-                        const key = deckInfo.title
-                        deckInfo.fetchRemoveFeck(key)
                         this.props.navigation.navigate('DeckList')
+                        const key = deckInfo.title
+                        deckInfo.fetchRemoveDeck(key)
                     }
                 },
             ],
@@ -60,13 +69,24 @@ class DeckInfo extends React.Component {
         )
     }
 
+    componentDidMount() {
+        const key = this.props.navigation.getParam('key', {})
+        const deckInfo = this.props.store.deckInfo(key)
+        if (deckInfo.length > 0) {
+            const { title, description, numOfQuestions, bestResult } = deckInfo[0]
+            this.setState({
+                title, description, numOfQuestions, bestResult, deckInfo: deckInfo[0]
+            })
+        }
+    }
+
     render() {
-        const deckInfo = this.props.navigation.getParam('deckInfo', {})
-        const { title, description, numOfQuestions, bestResult } = deckInfo
+        const { title, description, numOfQuestions, bestResult, deckInfo } = this.state
+        console.log('State: ', this.state)
         return (
             <BasicView>
                 <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-                    <PageTitle headerFontColor={deckInfoHeader}>{title}</PageTitle>
+                    <PageTitle headerFontColor={deckInfoHeader}>{title || 'No title'}</PageTitle>
                     <DeckDescription fontColor={deckDescriptionColor}>{description || 'No description'}</DeckDescription>
                     <DeckInfoItem>
                         <DeckInfoItemText fontColor={deckInfoItemTextColor}># of Questions</DeckInfoItemText>

@@ -1,4 +1,4 @@
-import { types, getParent, destroy } from "mobx-state-tree"
+import { types, getParent, destroy, flow } from "mobx-state-tree"
 import * as API from '../api'
 
 const Question = types
@@ -20,19 +20,25 @@ const Deck = types
         }
     }))
     .actions(self => ({
-        fetchAddQuestion({ key, questionObject }) {
-            API.addQuestionToDeck({ key, questionObject }).then(() => {
-                self.addQuestion(questionObject)
-            })
-        },
-        fetchRemoveFeck(key) {
-            API.removeDeck(key).then(() => {
+        fetchAddQuestion: flow(function* fetchAddQuestion({ key, questionObject }) {
+            try {
+                const questions = yield API.addQuestionToDeck({ key, questionObject })
+                self.questions = questions.map(question => {
+                    return { ...question }
+                })
+
+            } catch (error) {
+                console.error("Failed to fetch decks", error)
+            }
+        }),
+        fetchRemoveDeck: flow(function* fetchRemoveDeck(key) {
+            try {
+                const removedDeck = yield API.removeDeck(key)
                 getParent(self, 2).removeDeck(self)
-            })
-        },
-        addQuestion({ question, answer }) {
-            self.questions.push({ question, answer })
-        }
+            } catch (error) {
+                console.error("Failed to remove deck", error)
+            }
+        })
     }))
 
 const DeckList = types
@@ -40,29 +46,32 @@ const DeckList = types
         decks: types.array(Deck),
     })
     .actions(self => ({
-        fetchDecks() {
-            API.getDecks().then(res => {
-                res.map(item => {
+        fetchDecks: flow(function* fetchDecks() {
+            try {
+                const decks = yield API.getDecks()
+                self.decks = decks.map(item => {
                     const deckInfo = JSON.parse(item[1])
-                    self.addDeck(deckInfo)
+                    return { ...deckInfo }
                 })
-            })
-        },
-        fetchAddDeck({ key, deckInfo }) {
-            API.addNewDeck({ key, deckInfo }).then(() => {
-                self.addDeck(deckInfo)
-            })
-        },
-        addDeck(deckInfo) {
-            self.decks.push({ ...deckInfo })
-        },
+            } catch (error) {
+                console.error("Failed to fetch decks", error)
+            }
+        }),
+        fetchAddDeck: flow(function* fetchAddDeck({ key, deckInfo }) {
+            try {
+                const deck = yield API.addNewDeck({ key, deckInfo })
+                self.decks.push({ ...deck })
+            } catch (error) {
+                console.error("Failed to add new deck", error)
+            }
+        }),
         removeDeck(deck) {
             destroy(deck)
         }
     }))
     .views(self => ({
-        deckInfo(title) {
-            return self.decks.filter(deck => deck.title === title)
+        deckInfo(key) {
+            return self.decks.filter(deck => deck.title === key)
         }
     }))
 

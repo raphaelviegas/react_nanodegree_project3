@@ -1,9 +1,31 @@
-import React from 'react';
+import React from 'react'
 import QuizCard from '../../components/QuizCard'
-import { Text, View, StyleSheet, Button } from 'react-native';
+import { Text, View, StyleSheet, Button } from 'react-native'
+import ArrayShuffle from 'array-shuffle'
 
 export default class QuizQuestion extends React.Component {
+    state = {
+        questions: [],
+        numOfQuestions: 0,
+        rightAnswers: 0,
+        showQuestions: '',
+        showAnswer: '',
+        deckKey: ''
+    }
+
+    componentDidMount() {
+        const deckInfo = this.props.navigation.getParam('deckInfo', {})
+        const { title, numOfQuestions, questions } = deckInfo
+        const shuffledQuestions = ArrayShuffle(questions)
+        this.setState({
+            questions: shuffledQuestions,
+            numOfQuestions,
+            deckKey: title
+        })
+    }
+
     render() {
+        console.log('State: ', JSON.stringify(this.state))
         return (
             <View style={styles.container}>
                 <Text>QuizQuestion Screen</Text>

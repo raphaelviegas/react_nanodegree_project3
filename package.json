@@ -9,6 +9,7 @@
     "eject": "expo eject"
   },
   "dependencies": {
+    "array-shuffle": "^1.0.1",
     "expo": "^31.0.2",
     "mobx": "^5.8.0",
     "mobx-react": "^5.4.3",

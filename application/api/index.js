@@ -11,7 +11,7 @@ export function getDeck(key) {
 
 export function addNewDeck({ key, deckInfo }) {
     const value = JSON.stringify(deckInfo)
-    return AsyncStorage.setItem(key, value)
+    return AsyncStorage.setItem(key, value).then(() => { return deckInfo })
 }
 
 export function removeDeck(key) {
@@ -29,6 +29,7 @@ export function addQuestionToDeck({ key, questionObject }) {
                 cardInfo.questions.push(questionObject)
             }
             AsyncStorage.setItem(key, JSON.stringify(cardInfo))
+            return cardInfo.questions
         })
 }
 

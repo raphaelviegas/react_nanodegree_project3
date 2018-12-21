@@ -27,15 +27,17 @@ class AddDeck extends React.Component {
             description: deckDescription
         }
         //Call action
-        this.props.store.fetchAddDeck({ key: deckName, deckInfo })
+        this.props.store.fetchAddDeck({ key: deckName, deckInfo }).then(() => {
+            //Go to Deck Page
+            this.props.navigation.navigate('Deck', { key: deckName })
+        })
+
         //Clear state
         this.setState(() => ({
             deckName: '',
             deckDescription: ''
         }))
 
-        //Go to Deck Page
-        this.props.navigation.navigate('Deck', { deckInfo })
     }
 
     render() {
