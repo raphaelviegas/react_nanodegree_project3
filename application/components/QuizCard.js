@@ -1,6 +1,7 @@
 import React from 'react'
 import styled from 'styled-components/native'
-import { primary, } from '../config/colors'
+import { primary, white, blue, red, green } from '../config/colors'
+import CustomButton from './CustomButton'
 
 
 const Card = styled.View`
@@ -8,12 +9,14 @@ const Card = styled.View`
     border-radius: 3;
     box-shadow: 0px 2px 2px #a3a3a3;
     width: 95%;
-    max-height: 40%;
+    max-height: 30%;
+    flex-grow: 1;
     margin-left: auto;
     margin-right: auto;
+    margin-bottom: 20;
     align-items: center;
     justify-content: center;
-    padding-top: 20;
+    padding-top: 40;
     padding-bottom: 20;
     padding-left: 10;
     padding-right: 10;
@@ -22,24 +25,52 @@ const Card = styled.View`
 const CardFront = styled.View`
     flex-grow: 1;
     display: ${props => props.display};
+    align-items: center;
 `
 
 const CardBack = styled.View`
     flex-grow: 1;
     display: ${props => props.display};
+    align-items: center;
 `
 
 const Question = styled.Text`
     color: ${props => props.fontColor};
-    font-size: 18;
+    font-size: 20;
     font-weight: 700;
+    margin-bottom: 20;
 `
 
 
 const Answer = styled.Text`
     color: ${props => props.fontColor};
-    font-size: 18;
+    font-size: 20;
     font-weight: 700;
+    margin-bottom: 20;
+`
+
+const CustomView = styled.View`
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+`
+
+const AnswerButton = styled.TouchableOpacity`
+    background-color: ${props => props.backgroundColor};
+    padding-top: 8;
+    padding-bottom: 8;
+    padding-left: 20;
+    padding-right: 20;
+    border-radius: 8;
+    margin-left: 10;
+    margin-right: 10;
+`
+const AnswerButtonText = styled.Text`
+    color: white;
+    font-size: 16;
+    text-align: center;
+    font-weight: 500;
 `
 
 
@@ -49,11 +80,18 @@ class QuizCard extends React.Component {
         answerDisplay: 'none'
     }
 
-    showAnswer = () => {
+    _showAnswer = () => {
         this.setState(() => ({
             questionDisplay: 'none',
             answerDisplay: 'flex'
         }))
+    }
+
+    _onAnswer = (answer) => {
+        this.setState(() => ({
+            questionDisplay: 'flex',
+            answerDisplay: 'none'
+        }), this.props.onAnswer(answer))
     }
 
     render() {
@@ -64,11 +102,29 @@ class QuizCard extends React.Component {
             <Card>
                 <CardFront display={questionDisplay}>
                     <Question fontColor={primary} >{question}</Question>
-                    {/* {Aqui vai o botão para mostrar a resposta} */}
+                    <CustomButton
+                        backgroundColor={white}
+                        fontColor={blue}
+                        onPress={this._showAnswer}
+                        small={true}
+                    >Show Answer</CustomButton>
                 </CardFront>
                 <CardBack display={answerDisplay}>
                     <Answer fontColor={primary} >{answer}</Answer>
-                    {/* {Aqui vão os botões para indicar resposta certa ou errada} */}
+                    <CustomView>
+                        <AnswerButton
+                            backgroundColor={red}
+                            fontColor={white}
+                            onPress={() => this._onAnswer('Wrong')}
+                            small={true}
+                        ><AnswerButtonText>Wrong!</AnswerButtonText></AnswerButton>
+                        <AnswerButton
+                            backgroundColor={green}
+                            fontColor={white}
+                            onPress={() => this._onAnswer('Right')}
+                            small={true}
+                        ><AnswerButtonText>Right!</AnswerButtonText></AnswerButton>
+                    </CustomView>
                 </CardBack>
             </Card>
         )

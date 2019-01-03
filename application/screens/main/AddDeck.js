@@ -14,13 +14,13 @@ class AddDeck extends React.Component {
         deckDescription: ''
     }
 
-    updateInput = (key, value) => {
+    _updateInput = (key, value) => {
         this.setState(() => ({
             [key]: value
         }))
     }
 
-    addDeck = () => {
+    _addDeck = () => {
         const { deckName, deckDescription } = this.state
         const deckInfo = {
             title: deckName,
@@ -45,13 +45,13 @@ class AddDeck extends React.Component {
         return (
             <BasicView justifyContent="center">
                 <PageTitle headerFontColor={headerFontColor}>Add new deck</PageTitle>
-                <CustomInput label="Deck Name" value={deckName} onChange={(text) => this.updateInput('deckName', text)} />
-                <CustomInput label="Deck Description" value={deckDescription} onChange={(text) => this.updateInput('deckDescription', text)} />
+                <CustomInput label="Deck Name" value={deckName} onChange={(text) => this._updateInput('deckName', text)} />
+                <CustomInput label="Deck Description" value={deckDescription} onChange={(text) => this._updateInput('deckDescription', text)} />
                 <CustomButton
                     backgroundColor={defaultBackgroundColor}
                     fontColor={defaultFontColor}
                     small={true}
-                    onPress={this.addDeck}
+                    onPress={this._addDeck}
                 >Add Deck</CustomButton>
             </BasicView>
         );

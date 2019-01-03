@@ -42,8 +42,7 @@ const DeckInfoItemHighlight = styled.Text`
 `
 
 class DeckInfo extends React.Component {
-
-    removeDeck = (deckInfo) => {
+    _removeDeck = (deckInfo) => {
         Alert.alert(
             'Remove Deck',
             `Are you sure you want to remove ${deckInfo.title}`,
@@ -92,7 +91,7 @@ class DeckInfo extends React.Component {
                         backgroundColor={red}
                         fontColor={defaultFontColor}
                         small={true}
-                        onPress={() => this.removeDeck(deckInfo)}
+                        onPress={() => this._removeDeck(deckInfo)}
                     >Remove Deck</CustomButton>
                 </View>
             </BasicView>

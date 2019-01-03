@@ -8,7 +8,7 @@ import AddDeck from './screens/main/AddDeck'
 import DeckInfo from './screens/deck/DeckInfo'
 import AddQuestion from './screens/deck/AddQuestion'
 import StartQuiz from './screens/deck/StartQuiz'
-import QuizQuestion from './screens/quiz/QuizQuestion'
+import QuizQuestions from './screens/quiz/QuizQuestions'
 import QuizResult from './screens/quiz/QuizResult'
 import { statusColor, tabBarActive, tabBarInactive } from './config/colors'
 
@@ -71,7 +71,7 @@ const DeckView = createBottomTabNavigator(
 
 const QuizView = createStackNavigator({
     QuizQuestion: {
-        screen: QuizQuestion,
+        screen: QuizQuestions,
         navigationOptions: {
             header: null
         }
