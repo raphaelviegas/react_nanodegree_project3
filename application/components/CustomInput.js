@@ -1,6 +1,6 @@
 import React from 'react'
 import styled from 'styled-components/native'
-import { defaultBorderColor, defaultInputTextColor, primary } from '../config/colors'
+import { defaultBorderColor, defaultInputTextColor, primary, errorMessageColor } from '../config/colors'
 
 const InputView = styled.View`
     width: 95%;
@@ -29,7 +29,16 @@ const CustomTextInput = styled.TextInput`
     padding-right: 6;
 `
 
-function CustomInput({ value, label, fontColor = defaultInputTextColor, borderColor = defaultBorderColor, onChange }) {
+const ErrorMessage = styled.Text`
+    color: ${props => props.fontColor};
+    font-style: italic;
+    font-size: 14;
+    font-weight: 100;
+    margin-top: 5;
+    margin-bottom: 10;
+`
+
+function CustomInput({ value, label, showErrorMessage = false, fontColor = defaultInputTextColor, borderColor = defaultBorderColor, onChange }) {
     return (
         <InputView>
             {label && <InputLabel fontColor={fontColor}>{label}</InputLabel>}
@@ -39,6 +48,7 @@ function CustomInput({ value, label, fontColor = defaultInputTextColor, borderCo
                 value={value}
                 onChangeText={onChange}
             />
+            {showErrorMessage && <ErrorMessage fontColor={errorMessageColor}>This field cannot be empty</ErrorMessage>}
         </InputView>
     )
 }

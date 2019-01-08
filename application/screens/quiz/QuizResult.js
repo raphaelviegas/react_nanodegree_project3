@@ -19,7 +19,6 @@ class QuizResult extends React.Component {
 
     _checkBestScore = ({ bestScore, lastScore, deckInfo }) => {
         if (bestScore === 0 || lastScore >= bestScore) {
-            console.log('Este é o seu melhor resultado!')
             deckInfo.fetchUpdateBestResult({ key: deckInfo.title, quizResult: lastScore })
             return 'Congratulations, this is your best score!'
 
@@ -31,7 +30,6 @@ class QuizResult extends React.Component {
     componentDidMount() {
         //Get params from react navigation
         const key = this.props.navigation.getParam('key', {})
-        console.log('Key: ', key)
         const rightAnswers = this.props.navigation.getParam('rightAnswers', {})
         const numOfQuestions = this.props.navigation.getParam('numOfQuestions', {})
         const deckInfo = this.props.store.deckInfo(key)[0]
@@ -52,8 +50,6 @@ class QuizResult extends React.Component {
 
     render() {
         const key = this.props.navigation.getParam('key', {})
-
-        let renderImage = ''
 
         return (
             <BasicView>

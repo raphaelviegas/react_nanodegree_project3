@@ -11,11 +11,12 @@ const View = styled.View`
     padding-bottom: ${Platform.OS === 'ios' ? 35 : 10};
     background-color: ${props => props.backgroundColor};
     justify-content: ${props => props.justifyContent};
+
 `
 
-const BasicView = ({ children, justifyContent = 'center' }) => {
+const BasicView = ({ children, justifyContent = 'center', }) => {
     return (
-        <View backgroundColor={background} justifyContent={justifyContent}>
+        <View backgroundColor={background} justifyContent={justifyContent} >
             {children}
         </View>
     )

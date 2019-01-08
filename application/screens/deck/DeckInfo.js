@@ -1,4 +1,5 @@
 import React from 'react';
+import { observer, inject } from "mobx-react"
 import BasicView from '../../components/BasicView'
 import styled from 'styled-components/native'
 import { deckInfoHeader, deckDescriptionColor, deckInfoItemTextColor, deckInfoItemHighlightColor } from '../../config/colors'
@@ -6,7 +7,6 @@ import { View } from 'react-native'
 import PageTitle from '../../components/PageTitle'
 import CustomButton from '../../components/CustomButton'
 import { red, defaultFontColor } from '../../config/colors'
-import { observer, inject } from "mobx-react";
 import { Alert } from 'react-native'
 
 const DeckDescription = styled.Text`

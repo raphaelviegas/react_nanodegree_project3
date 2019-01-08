@@ -1,15 +1,18 @@
 import React from 'react';
+import { observer, inject } from "mobx-react"
 import BasicView from '../../components/BasicView'
 import CustomInput from '../../components/CustomInput'
 import CustomButton from '../../components/CustomButton'
 import { defaultBackgroundColor, defaultFontColor } from '../../config/colors'
-import { observer, inject } from "mobx-react";
+import { Alert } from 'react-native'
 
 class AddQuestion extends React.Component {
     state = {
         question: '',
         answer: '',
-        deckInfo: {}
+        deckInfo: {},
+        questionInputErrorMessage: false,
+        answerInputErrorMessage: false,
     }
 
     updateInput = (key, value) => {
@@ -19,16 +22,33 @@ class AddQuestion extends React.Component {
     }
 
     addQuestion = ({ question, answer, deckInfo }) => {
+        if (question === '') {
+            this.setState({
+                questionInputErrorMessage: true,
+            })
+            return
+        }
+        if (answer === '') {
+            this.setState({
+                answerInputErrorMessage: true,
+            })
+            return
+        }
         const key = deckInfo.title
         const questionObject = { question, answer }
 
         //Call action
         deckInfo.fetchAddQuestion({ key, questionObject })
 
+        //Show message to the user
+        Alert.alert('Question added to the deck')
+
         //Clear state
         this.setState(() => ({
             question: '',
-            answer: ''
+            answer: '',
+            questionInputErrorMessage: false,
+            answerInputErrorMessage: false,
         }))
     }
 
@@ -43,11 +63,11 @@ class AddQuestion extends React.Component {
     }
 
     render() {
-        const { question, answer, deckInfo } = this.state
+        const { question, answer, deckInfo, questionInputErrorMessage, answerInputErrorMessage } = this.state
         return (
             <BasicView>
-                <CustomInput label="Question" value={question} onChange={(text) => this.updateInput('question', text)} />
-                <CustomInput label="Answer" value={answer} onChange={(text) => this.updateInput('answer', text)} />
+                <CustomInput label="Question" showErrorMessage={questionInputErrorMessage} value={question} onChange={(text) => this.updateInput('question', text)} />
+                <CustomInput label="Answer" showErrorMessage={answerInputErrorMessage} value={answer} onChange={(text) => this.updateInput('answer', text)} />
                 <CustomButton
                     backgroundColor={defaultBackgroundColor}
                     fontColor={defaultFontColor}

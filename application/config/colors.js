@@ -19,6 +19,10 @@ export const tabBarInactive = grey
 // PAGETITLE COLORS
 export const headerFontColor = black
 
+// MESSAGES COLORS
+export const errorMessageColor = red
+export const successMessageColor = primary
+
 // CARD COLORS
 export const cardBackgroundColor = white
 export const cardBorderColor = primary

@@ -47,7 +47,6 @@ class QuizQuestion extends React.Component {
     }
 
     render() {
-        console.log('State: ', JSON.stringify(this.state))
         const key = this.props.navigation.getParam('key', {})
 
         const { questions, numOfQuestions, currentQuestion, deckKey } = this.state
