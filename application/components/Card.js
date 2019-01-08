@@ -93,7 +93,7 @@ const DeckCard = (props) => {
                 </CardContentItem>
                 <CardContentItem>
                     <CardContentItemHeader fontColor={'#FFF'}>Quiz best result</CardContentItemHeader>
-                    <CardContentText>{props.cardContent.bestResult}</CardContentText>
+                    <CardContentText>{props.cardContent.bestResult}%</CardContentText>
                 </CardContentItem>
             </CardContent>
         </CardTouchableOpacity>

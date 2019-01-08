@@ -43,6 +43,7 @@ export function saveQuizBestResult({ key, quizResult }) {
                 cardInfo.bestResult = quizResult
             }
             AsyncStorage.setItem(key, JSON.stringify(cardInfo))
+            return quizResult
         })
 }
 

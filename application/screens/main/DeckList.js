@@ -18,7 +18,7 @@ class DeckList extends React.Component {
                     keyExtractor={(item, index) => index.toString()}
                     renderItem={({ item }) => <Card cardContent={item} onPressCard={() => this._goToDeckPage(item.title)} />}
                     //Used extraData to re-render FlatList after adding a deck or adding a question to a deck
-                    extraData={{ length: this.props.store.decks.length, numOfQuestions: this.props.store.decks.map(deck => deck.numOfQuestions) }}
+                    extraData={{ length: this.props.store.decks.length, numOfQuestions: this.props.store.decks.map(deck => deck.numOfQuestions), bestResults: this.props.store.decks.map(deck => deck.bestResult) }}
                 />
             </View>
         );

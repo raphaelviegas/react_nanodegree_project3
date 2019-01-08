@@ -25,7 +25,6 @@ class QuizQuestion extends React.Component {
     }
 
     _answerQuestion = (answer) => {
-        console.log('Questao respondida, opção: ', answer)
         if (answer === 'Right') {
             this.setState(prevState => ({
                 rightAnswers: prevState.rightAnswers + 1,

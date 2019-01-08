@@ -12,7 +12,7 @@ const Deck = types
         title: types.string,
         description: types.string,
         questions: types.optional(types.array(Question), []),
-        bestResult: types.optional(types.string, '-'),
+        bestResult: types.optional(types.number, 0),
     })
     .views(self => ({
         get numOfQuestions() {
@@ -38,7 +38,16 @@ const Deck = types
             } catch (error) {
                 console.error("Failed to remove deck", error)
             }
-        })
+        }),
+        fetchUpdateBestResult: flow(function* fetchUpdateBestResult({ key, quizResult }) {
+            try {
+                const response = yield API.saveQuizBestResult({ key, quizResult })
+                self.bestResult = response
+
+            } catch (error) {
+                console.error("Failed to update deck best result", error)
+            }
+        }),
     }))
 
 const DeckList = types

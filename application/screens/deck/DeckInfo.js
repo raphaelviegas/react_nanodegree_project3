@@ -85,7 +85,7 @@ class DeckInfo extends React.Component {
                     </DeckInfoItem>
                     <DeckInfoItem>
                         <DeckInfoItemText fontColor={deckInfoItemTextColor}>Quiz best result</DeckInfoItemText>
-                        <DeckInfoItemHighlight fontColor={deckInfoItemHighlightColor}>{bestResult || '-'}</DeckInfoItemHighlight>
+                        <DeckInfoItemHighlight fontColor={deckInfoItemHighlightColor}>{bestResult || '0'}%</DeckInfoItemHighlight>
                     </DeckInfoItem>
                     <CustomButton
                         backgroundColor={red}

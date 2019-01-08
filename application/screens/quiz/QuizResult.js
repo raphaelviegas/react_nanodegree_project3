@@ -7,49 +7,59 @@ import { outlinedButtonBackground, outlinedButtonBorderColor, outlinedButtonFont
 
 class QuizResult extends React.Component {
     state = {
-        key: null,
+        deckInfo: {},
         bestScore: null,
-        lastScore: null
+        lastScore: null,
+        message: ''
     }
 
     _calculatePercentage = (rightAnswers, numOfQuestions) => {
         return Math.floor((rightAnswers / numOfQuestions) * 100)
     }
 
-    _checkBestScore = (bestScore, lastScore) => {
-        console.log('Chamou o método que verifica o melhor score')
-        console.log('BestScore: ', bestScore)
-        console.log('LastScore: ', lastScore)
-        // Verificar se o resultado atual é melhor que o anterior. Se for, atualizar no AsyncStorage e mostrar uma mensagem "Esse é o seu melhor Score"
-        // Se não for, informar o melhor score anterior e uma mensagem de 'continue tentando'
+    _checkBestScore = ({ bestScore, lastScore, deckInfo }) => {
+        if (bestScore === 0 || lastScore >= bestScore) {
+            console.log('Este é o seu melhor resultado!')
+            deckInfo.fetchUpdateBestResult({ key: deckInfo.title, quizResult: lastScore })
+            return 'Congratulations, this is your best score!'
+
+        } else {
+            return 'You\'ve been better. Keep trying and you\'ll get there.'
+        }
     }
 
     componentDidMount() {
         //Get params from react navigation
         const key = this.props.navigation.getParam('key', {})
+        console.log('Key: ', key)
         const rightAnswers = this.props.navigation.getParam('rightAnswers', {})
         const numOfQuestions = this.props.navigation.getParam('numOfQuestions', {})
+        const deckInfo = this.props.store.deckInfo(key)[0]
 
         // Check bestScore
-        const bestScore = this.props.store.deckInfo(key)[0].bestResult
+        const bestScore = deckInfo.bestResult
         const lastScore = this._calculatePercentage(rightAnswers, numOfQuestions)
-        this._checkBestScore(bestScore, lastScore)
+        const message = this._checkBestScore({ bestScore, lastScore, deckInfo })
 
         //Update State
         this.setState({
-            key,
+            deckInfo,
             bestScore,
-            lastScore
+            lastScore,
+            message
         })
     }
 
     render() {
         const key = this.props.navigation.getParam('key', {})
-        console.log('State: ', this.state)
+
+        let renderImage = ''
+
         return (
             <BasicView>
                 <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
                     <Text>Your Score is {this.state.lastScore}%</Text>
+                    <Text>{this.state.message}</Text>
                     <CustomButton
                         onPress={() => this.props.navigation.navigate('DeckInfo', { key })}
                     >Return to deck info</CustomButton>
