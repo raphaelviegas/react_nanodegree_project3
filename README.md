@@ -2,7 +2,7 @@
 
 This project was developed as part of the Udacity's React Fundamentals course. The app shows a list os decks in which you can create cards that contain questions and answer. To try your knowledge you can take quizes! The app will save you quiz best score so you can compare your results.
 
-**This project was create using create-react-native-app.**
+**This project was create using [create-react-native-app](https://github.com/react-community/create-react-native-app).**
 
 **The application was tested on IOS only and may not work properly on Android devices**
 
