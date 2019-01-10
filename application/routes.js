@@ -23,7 +23,7 @@ const HomeView = createBottomTabNavigator(
         DeckList: {
             screen: DeckList,
             navigationOptions: {
-                tabBarLabel: 'Show Decks',
+                tabBarLabel: 'Deck List',
                 tabBarIcon: ({ tintColor }) => <MaterialCommunityIcons name='cards' size={26} color={tintColor} />
             },
         },
@@ -70,7 +70,7 @@ const DeckView = createBottomTabNavigator(
 )
 
 const QuizView = createStackNavigator({
-    QuizQuestion: {
+    QuizQuestions: {
         screen: QuizQuestions,
         navigationOptions: {
             header: null

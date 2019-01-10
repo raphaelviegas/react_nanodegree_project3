@@ -11,7 +11,7 @@ class QuizQuestion extends React.Component {
         numOfQuestions: 0,
         rightAnswers: 0,
         currentQuestion: 0,
-        deckKey: '',
+        deckKey: ''
     }
 
     _configQuiz = quizInfo => {
@@ -20,6 +20,8 @@ class QuizQuestion extends React.Component {
         this.setState({
             questions: shuffledQuestions,
             numOfQuestions,
+            currentQuestion: 0,
+            rightAnswers: 0,
             deckKey: title
         })
     }
@@ -45,10 +47,21 @@ class QuizQuestion extends React.Component {
         const storedDeckInfo = this.props.store.deckInfo(key)
         this._configQuiz(storedDeckInfo[0])
     }
+    componentDidUpdate() {
+        console.log('Chamou o componentDidUpdate')
+        const restart = this.props.navigation.getParam('restart')
+        console.log('Parametro: ', restart)
+        if (restart) {
+            console.log('Chamou restart como verdadeiro e reconfigurou o quiz')
+            this.props.navigation.setParams({ restart: false })
+            const key = this.props.navigation.getParam('key', {})
+            const storedDeckInfo = this.props.store.deckInfo(key)
+            this._configQuiz(storedDeckInfo[0])
+        }
+    }
 
     render() {
-        const key = this.props.navigation.getParam('key', {})
-
+        console.log('Estado do componente: ', this.state)
         const { questions, numOfQuestions, currentQuestion, deckKey } = this.state
         const question = questions[currentQuestion] ? questions[currentQuestion].question : null
         const answer = questions[currentQuestion] ? questions[currentQuestion].answer : null

@@ -16,7 +16,7 @@ class StartQuiz extends React.Component {
                 </View>
             )
         } else {
-            return <CustomButton onPress={() => this.props.navigation.navigate('Quiz', { key })} >Start Quiz</CustomButton>
+            return <CustomButton onPress={() => this.props.navigation.navigate('Quiz', { key, restart: false })} >Start Quiz</CustomButton>
         }
     }
     render() {

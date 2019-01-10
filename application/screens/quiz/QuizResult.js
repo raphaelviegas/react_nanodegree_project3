@@ -57,14 +57,14 @@ class QuizResult extends React.Component {
                     <Text>Your Score is {this.state.lastScore}%</Text>
                     <Text>{this.state.message}</Text>
                     <CustomButton
-                        onPress={() => this.props.navigation.navigate('DeckInfo', { key })}
-                    >Return to deck info</CustomButton>
+                        onPress={() => this.props.navigation.navigate('QuizQuestions', { key, restart: true })}
+                    >Restart Quiz</CustomButton>
                     <CustomButton
                         backgroundColor={outlinedButtonBackground}
                         fontColor={outlinedButtonFontColor}
                         borderColor={outlinedButtonBorderColor}
-                        onPress={() => this.props.navigation.navigate('Home')}
-                    >Go back to Home</CustomButton>
+                        onPress={() => this.props.navigation.navigate('DeckInfo', { key })}
+                    >Return to Deck Info</CustomButton>
                 </View>
             </BasicView>
         );
