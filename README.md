@@ -11,4 +11,4 @@ This project was developed as part of the Udacity's React Fundamentals course. T
 * `expo start`
 >You may need to run 'sudo expo start' if you got a permission error
 
-## Tests are not included. Feel free or clone to fork the project and implement it youself
+**Tests are not included. Feel free or clone to fork the project and implement it youself**
