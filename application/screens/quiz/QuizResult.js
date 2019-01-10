@@ -3,7 +3,8 @@ import { observer, inject } from "mobx-react";
 import BasicView from '../../components/BasicView'
 import { View, Text } from 'react-native';
 import CustomButton from '../../components/CustomButton'
-import { outlinedButtonBackground, outlinedButtonBorderColor, outlinedButtonFontColor } from '../../config/colors'
+import { outlinedButtonBackground, outlinedButtonBorderColor, outlinedButtonFontColor, primary, grey } from '../../config/colors'
+import { clearLocalNotification, setLocalNotification } from '../../api'
 
 class QuizResult extends React.Component {
     state = {
@@ -23,7 +24,7 @@ class QuizResult extends React.Component {
             return 'Congratulations, this is your best score!'
 
         } else {
-            return 'You\'ve been better. Keep trying and you\'ll get there.'
+            return `Your best score is ${bestScore}%. Keep trying and you\'ll get there.`
         }
     }
 
@@ -46,6 +47,10 @@ class QuizResult extends React.Component {
             lastScore,
             message
         })
+
+        //Clear Notification
+        clearLocalNotification()
+            .then(setLocalNotification)
     }
 
     render() {
@@ -54,8 +59,8 @@ class QuizResult extends React.Component {
         return (
             <BasicView>
                 <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-                    <Text>Your Score is {this.state.lastScore}%</Text>
-                    <Text>{this.state.message}</Text>
+                    <Text style={{ fontSize: 24, fontWeight: '700', textAlign: 'center', color: primary, marginBottom: 10 }}>Your Score is {this.state.lastScore}%</Text>
+                    <Text style={{ fontSize: 16, textAlign: 'center', color: grey, marginBottom: 20 }}>{this.state.message}</Text>
                     <CustomButton
                         onPress={() => this.props.navigation.navigate('QuizQuestions', { key, restart: true })}
                     >Restart Quiz</CustomButton>

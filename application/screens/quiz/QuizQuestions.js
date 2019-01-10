@@ -2,7 +2,8 @@ import React from 'react'
 import { observer, inject } from "mobx-react";
 import QuizCard from '../../components/QuizCard'
 import CustomButton from '../../components/CustomButton'
-import { Text, View, StyleSheet, Button } from 'react-native'
+import { Text, View, StyleSheet } from 'react-native'
+import { grey } from '../../config/colors'
 import ArrayShuffle from 'array-shuffle'
 
 class QuizQuestion extends React.Component {
@@ -75,7 +76,7 @@ class QuizQuestion extends React.Component {
         return (
             <View style={styles.container}>
                 <QuizCard question={question} answer={answer} onAnswer={this._answerQuestion} />
-                <Text>Question {currentQuestion + 1} of {numOfQuestions}</Text>
+                <Text style={{ fontSize: 16, color: grey, fontWeight: '400' }}>Question {currentQuestion + 1} of {numOfQuestions}</Text>
             </View>
         );
     }

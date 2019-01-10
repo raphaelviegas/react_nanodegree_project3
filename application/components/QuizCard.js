@@ -1,8 +1,7 @@
 import React from 'react'
 import styled from 'styled-components/native'
-import { primary, white, blue, red, green } from '../config/colors'
+import { primary, white, blue, red, green, grey } from '../config/colors'
 import CustomButton from './CustomButton'
-
 
 const Card = styled.View`
     background-color: white;
@@ -104,7 +103,7 @@ class QuizCard extends React.Component {
                     <Question fontColor={primary} >{question}</Question>
                     <CustomButton
                         backgroundColor={white}
-                        fontColor={blue}
+                        fontColor={grey}
                         onPress={this._showAnswer}
                         small={true}
                     >Show Answer</CustomButton>

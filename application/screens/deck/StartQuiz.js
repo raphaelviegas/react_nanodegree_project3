@@ -3,6 +3,7 @@ import { observer, inject } from "mobx-react"
 import CustomButton from '../../components/CustomButton'
 import BasicView from '../../components/BasicView'
 import { View, Text } from 'react-native'
+import { grey } from '../../config/colors'
 
 class StartQuiz extends React.Component {
     _checkQuestions = (key) => {
@@ -10,7 +11,7 @@ class StartQuiz extends React.Component {
         if (numOfQuestions === 0) {
             return (
                 <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-                    <Text style={{ fontSize: 16, textAlign: 'center', color: '#778C91' }}>
+                    <Text style={{ fontSize: 16, textAlign: 'center', color: grey }}>
                         {`Your deck has no questions.\nYou must have at least one question to start the quiz.`}</Text>
                     <CustomButton onPress={() => this.props.navigation.navigate('AddQuestion', { key })} >Add Question</CustomButton>
                 </View>

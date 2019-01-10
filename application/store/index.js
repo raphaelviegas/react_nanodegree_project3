@@ -58,10 +58,13 @@ const DeckList = types
         fetchDecks: flow(function* fetchDecks() {
             try {
                 const decks = yield API.getDecks()
-                self.decks = decks.map(item => {
-                    const deckInfo = JSON.parse(item[1])
-                    return { ...deckInfo }
-                })
+                if (decks !== undefined) {
+                    self.decks = decks.map(item => {
+                        const deckInfo = JSON.parse(item[1])
+                        return { ...deckInfo }
+
+                    })
+                }
             } catch (error) {
                 console.error("Failed to fetch decks", error)
             }

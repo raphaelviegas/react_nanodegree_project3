@@ -5,6 +5,7 @@ import Screens from './application/screens'
 import { statusColor } from './application/config/colors'
 import { Provider } from 'mobx-react'
 import Store from './application/store'
+import { setLocalNotification } from './application/api'
 
 //onAction and onSnapshot are used for debugging. Unable that for production
 import { onAction, onSnapshot } from "mobx-state-tree";
@@ -24,6 +25,9 @@ function CustomStatusBar({ backgroundColor, ...props }) {
 }
 
 export default class App extends React.Component {
+  componentDidMount() {
+    setLocalNotification()
+  }
   render() {
     return (
       <Provider store={Store}>
